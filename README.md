@@ -11,3 +11,9 @@ TBD
 ```
 pip install flask-restful
 ```
+
+## Frontend Chat
+
+```
+http://127.0.0.1:5000/static/chatbot.html
+```
