@@ -1,13 +1,13 @@
-# projekt-programistyczny
-
-Projekt zaliczeniowy na Projekt programistyczny
-
-## Autorzy
-
+# ChatBot
+## Authors
 Artur Leśnik i Alicja Pęgiel
+## About ChatBot
+ChatBot is an REST API chat application. The project uses machine learning to teach the bot how to properly communicate with humans, while also making sense. 
+## Features
+TBD
 
-# Instrukcja instalacji
+## How to install
 
-'''
+```
 pip install flask-restful
-'''
+```
