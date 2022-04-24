@@ -6,7 +6,10 @@ from rest_api.api_endpoint_learn_spam import ChatbotLearnSpamData
 from rest_api.api_endpoint_learn_question import ChatbotLearnQuestionData
 from rest_api.api_endpoint_ask_question import ChatbotAskQuestion
 from rest_api.api_endpoint_ask_spam import ChatbotAskSpam
+from modules.database_manager import init_database
 
+
+init_database()
 
 app = Flask(__name__)
 api = Api(app)
