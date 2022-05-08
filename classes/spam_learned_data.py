@@ -18,6 +18,7 @@ class SpamLearnedData:
         :param str text: tekst, który będzie traktowany jako spam i posłuży do uczenia
         :return: None
         """
+        print('[SPAM] ' + text)
 
     def learn_no_spam(self, text: str) -> None:
         """
@@ -26,3 +27,4 @@ class SpamLearnedData:
         :param str text: tekst, który będzie traktowany jako dobry tekst i posłuży do uczenia
         :return: None
         """
+        print('[NIE-SPAM] ' + text)

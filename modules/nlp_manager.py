@@ -34,6 +34,13 @@ def learn_spam_data_from_seed() -> None:
     spam_data: dict = json.loads(spam_data_json)
     text_spam_data: list = spam_data['spam']
     text_no_spam_data: list = spam_data['nie-spam']
+    global spam_learned_data
+
+    for learn_text in text_spam_data:
+        spam_learned_data.learn_spam(learn_text)
+
+    for learn_text in text_no_spam_data:
+        spam_learned_data.learn_no_spam(learn_text)
 
 
 def load_learned_data_about_polish_language() -> None:
