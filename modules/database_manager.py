@@ -1,5 +1,7 @@
 import os
 
+from modules.nlp_manager import learn_polish_language_from_seed
+
 
 def init_database() -> None:
     """
@@ -16,5 +18,4 @@ def init_database() -> None:
             f.writelines('[]')
 
     if not os.path.exists('database/polish-database.json'):
-        with open('database/polish-database.json', 'w') as f:
-            f.writelines('[]')
+        learn_polish_language_from_seed()
