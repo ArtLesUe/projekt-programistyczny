@@ -2,6 +2,7 @@ import json
 
 from typing import IO
 
+POLISH_DICTIONARY_DB_PATH: str = 'database/polish-database.json'
 SEED_POLISH_DICTIONARY_PATH: str = 'seed/learn-polish-language.txt'
 
 
@@ -23,14 +24,14 @@ def learn_polish_language_from_seed() -> None:
         new_word: str = word.replace("\n", "").replace("\r", "")
         polish_words_list.append(new_word)
         i = i + 1
-        if i % 100000 == 0:
+        if i % 100000 == 0 or i == len(polish_words):
             print('[LEARN] Trwa uczenie się języka polskiego ze słownika: ' + str(i) + ' / ' + str(len(polish_words)))
 
     print('[LEARN] Zapisywanie efektów nauki do bazy danych...')
 
     polish_words_json: str = json.dumps(polish_words_list)
 
-    with open('database/polish-database.json', 'w') as f:
+    with open(POLISH_DICTIONARY_DB_PATH, 'w') as f:
         f.writelines(polish_words_json)
 
     print("[LEARN] Nauczono się następującej liczby polskich słów: " + str(len(polish_words_list)))

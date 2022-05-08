@@ -3,7 +3,7 @@ import os
 from modules.nlp_manager import learn_polish_language_from_seed
 
 
-SEED_POLISH_DICTIONARY_PATH: str = 'seed/learn-polish-language.txt'
+POLISH_DICTIONARY_DB_PATH: str = 'database/polish-database.json'
 
 
 def init_database() -> None:
@@ -20,5 +20,5 @@ def init_database() -> None:
         with open('database/questions-database.json', 'w') as f:
             f.writelines('[]')
 
-    if not os.path.exists(SEED_POLISH_DICTIONARY_PATH):
+    if not os.path.exists(POLISH_DICTIONARY_DB_PATH):
         learn_polish_language_from_seed()
