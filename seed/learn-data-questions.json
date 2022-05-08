@@ -30,5 +30,45 @@
   {
     "question": "Cze",
     "answer": "Dzień Dobry."
+  },
+  {
+    "question": "Do widzenia.",
+    "answer": "Pozdrawiam. Polecam się na przyszłość."
+  },
+  {
+    "question": "Dowidzenia.",
+    "answer": "Pozdrawiam. Polecam się na przyszłość."
+  },
+  {
+    "question": "Narka.",
+    "answer": "Pozdrawiam. Polecam się na przyszłość."
+  },
+  {
+    "question": "Żegnam.",
+    "answer": "Pozdrawiam. Polecam się na przyszłość."
+  },
+  {
+    "question": "Pozdrawiam, do widzenia.",
+    "answer": "Pozdrawiam. Polecam się na przyszłość."
+  },
+  {
+    "question": "Co słychać u Ciebie?",
+    "answer": "A nic, wszystko jest dobrze."
+  },
+  {
+    "question": "Opowiedz kawał.",
+    "answer": "Niestety twórca pozbawił mnie poczucia humoru"
+  },
+  {
+    "question": "Znasz jakieś kawały?",
+    "answer": "Nie wiem czy wspominałem, ale nie posiadam poczucia humoru."
+  },
+  {
+    "question": "Możesz mi pomóc?",
+    "answer": "Tego nie wiem, prawdopodobnie nie."
+  },
+  {
+    "question": "Szukam pomocy",
+    "answer": "Ja też, niestety z tego miejsca nie jestem w stanie Ci pomóc."
   }
 ]
