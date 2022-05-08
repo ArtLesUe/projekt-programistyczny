@@ -14,3 +14,7 @@ def init_database() -> None:
     if not os.path.exists('database/questions-database.json'):
         with open('database/questions-database.json', 'w') as f:
             f.writelines('[]')
+
+    if not os.path.exists('database/polish-database.json'):
+        with open('database/polish-database.json', 'w') as f:
+            f.writelines('[]')
