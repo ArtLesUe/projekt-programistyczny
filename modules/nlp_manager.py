@@ -6,6 +6,19 @@ POLISH_DICTIONARY_DB_PATH: str = 'database/polish-database.json'
 SEED_POLISH_DICTIONARY_PATH: str = 'seed/learn-polish-language.txt'
 
 
+def load_learned_data_about_polish_language() -> None:
+    """
+    Wczytuje już nauczone dane na temat języka polskiego do pamięci aplikacji.
+
+    :return: None
+    """
+    polish_learned: IO = open(POLISH_DICTIONARY_DB_PATH, 'r')
+    polish_learned_json: str = ' '.join(polish_learned.readlines())
+    polish_learned.close()
+    polish_learned_list: list = json.loads(polish_learned_json)
+    print('[LEARN] Wczytano dane nauki dla następującej ilości polskich słów: ' + str(len(polish_learned_list)))
+
+
 def learn_polish_language_from_seed() -> None:
     """
     Tworzy bazę danych polskich wyrazów na podstawie pliku nauki.
