@@ -5,6 +5,7 @@ from modules.nlp_manager import load_learned_data_about_polish_language
 
 
 POLISH_DICTIONARY_DB_PATH: str = 'database/polish-database.json'
+"""Ścieżka do pliku bazy danych z wyuczonymi danymi na temat polskich słów."""
 
 
 def init_database() -> None:
