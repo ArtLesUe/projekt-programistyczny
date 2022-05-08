@@ -3,15 +3,37 @@ import json
 from typing import IO
 
 from classes.polish_learned_data import PolishLearnedData
+from classes.spam_learned_data import SpamLearnedData
 
 
 POLISH_DICTIONARY_DB_PATH: str = 'database/polish-database.json'
 """Ścieżka do pliku bazy danych z wyuczonymi danymi na temat polskich słów."""
 SEED_POLISH_DICTIONARY_PATH: str = 'seed/learn-polish-language.txt'
 """Ścieżka do pliku słownika języka polskiego, który będzie uczył o polskich słowach."""
+SPAM_LEARN_DATA_DB_PATH: str = 'database/spam-database.json'
+"""Ścieżka do pliku bazy danych z wyuczonymi danymi na temat spamu i nie spamu."""
+SEED_SPAM_LEARN_DATA_PATH: str = 'seed/learn-data-spam.json'
+"""Ścieżka do pliku nauki na temat tego, co jest spamem, a co nie jest spamem."""
 
 polish_learned_data: PolishLearnedData = PolishLearnedData([])
 """Zmienna zawierająca obiekt z wyuczonymi danymi na temat polskich słów."""
+spam_learned_data: SpamLearnedData = SpamLearnedData([])
+"""Zmienna zawierająca obiekt z wyuczonymi danymi na temat spamu i nie spamu."""
+
+
+def learn_spam_data_from_seed() -> None:
+    """
+    Wczytuje dane uczące i rozpoczyna ich przetwarzanie w celu nauki algorytmu.
+
+    :return: None
+    """
+    print("\n[LEARN] Uczenie się informacji o spamie na podstawie pliku nauki...")
+    seed_file: IO = open(SEED_SPAM_LEARN_DATA_PATH, 'r')
+    spam_data_json: str = ' '.join(seed_file.readlines())
+    seed_file.close()
+    spam_data: dict = json.loads(spam_data_json)
+    text_spam_data: list = spam_data['spam']
+    text_no_spam_data: list = spam_data['nie-spam']
 
 
 def load_learned_data_about_polish_language() -> None:
