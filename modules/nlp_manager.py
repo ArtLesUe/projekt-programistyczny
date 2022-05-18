@@ -45,6 +45,13 @@ def learn_spam_data_from_seed() -> None:
 
     print('[LEARN] Zapisywanie efektów nauki do bazy danych...')
 
+    words_json: str = json.dumps(spam_learned_data.dump_database())
+
+    with open(SPAM_LEARN_DATA_DB_PATH, 'w') as f:
+        f.writelines(words_json)
+
+    print('[LEARN] Zapisano wyniki uczenia do pliku bazy danych...')
+
 
 def load_learned_data_about_polish_language() -> None:
     """
