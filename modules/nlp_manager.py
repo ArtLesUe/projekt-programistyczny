@@ -17,7 +17,7 @@ SEED_SPAM_LEARN_DATA_PATH: str = 'seed/learn-data-spam.json'
 
 polish_learned_data: PolishLearnedData = PolishLearnedData([])
 """Zmienna zawierająca obiekt z wyuczonymi danymi na temat polskich słów."""
-spam_learned_data: SpamLearnedData = SpamLearnedData([])
+spam_learned_data: SpamLearnedData = SpamLearnedData({})
 """Zmienna zawierająca obiekt z wyuczonymi danymi na temat spamu i nie spamu."""
 
 
@@ -28,6 +28,7 @@ def learn_spam_data_from_seed() -> None:
     :return: None
     """
     print("\n[LEARN] Uczenie się informacji o spamie na podstawie pliku nauki...")
+
     seed_file: IO = open(SEED_SPAM_LEARN_DATA_PATH, 'r')
     spam_data_json: str = ' '.join(seed_file.readlines())
     seed_file.close()
@@ -37,10 +38,12 @@ def learn_spam_data_from_seed() -> None:
     global spam_learned_data
 
     for learn_text in text_spam_data:
-        spam_learned_data.learn_spam(learn_text)
+        spam_learned_data.learn_spam(learn_text, polish_learned_data)
 
     for learn_text in text_no_spam_data:
-        spam_learned_data.learn_no_spam(learn_text)
+        spam_learned_data.learn_no_spam(learn_text, polish_learned_data)
+
+    print('[LEARN] Zapisywanie efektów nauki do bazy danych...')
 
 
 def load_learned_data_about_polish_language() -> None:
