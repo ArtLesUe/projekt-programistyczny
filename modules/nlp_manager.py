@@ -21,6 +21,22 @@ spam_learned_data: SpamLearnedData = SpamLearnedData({})
 """Zmienna zawierająca obiekt z wyuczonymi danymi na temat spamu i nie spamu."""
 
 
+def load_learned_spam_data_from_database() -> None:
+    """
+    Funkcja wczytuje do pamięci wyuczone dane o spamie.
+
+    :return: None
+    """
+    spam_learned: IO = open(SPAM_LEARN_DATA_DB_PATH, 'r')
+    spam_learned_json: str = ' '.join(spam_learned.readlines())
+    spam_learned.close()
+    spam_learned_list: dict = json.loads(spam_learned_json)
+    global spam_learned_data
+    spam_learned_data = SpamLearnedData(spam_learned_list)
+    print('[LEARN] Wczytano dane nauki dla następującej ilości polskich słów: ' + \
+          str(len(spam_learned_data.dump_database())))
+
+
 def learn_spam_data_from_seed() -> None:
     """
     Wczytuje dane uczące i rozpoczyna ich przetwarzanie w celu nauki algorytmu.
