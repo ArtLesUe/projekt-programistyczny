@@ -142,6 +142,7 @@ def learn_polish_language_from_seed() -> None:
 
     :return: None
     """
+    global polish_learned_data
     print("\n[LEARN] Uczenie się języka polskiego na podstawie słownika języka polskiego...")
     dictionary_file: IO = open(SEED_POLISH_DICTIONARY_PATH, 'r')
     polish_words = dictionary_file.readlines()
@@ -163,5 +164,7 @@ def learn_polish_language_from_seed() -> None:
 
     with open(POLISH_DICTIONARY_DB_PATH, 'w') as f:
         f.writelines(polish_words_json)
+
+    polish_learned_data = PolishLearnedData(polish_words_list)
 
     print("[LEARN] Nauczono się następującej liczby polskich słów: " + str(len(polish_words_list)))
