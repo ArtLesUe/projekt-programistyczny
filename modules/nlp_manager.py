@@ -28,6 +28,24 @@ questions_learned_data: QuestionsLearnedData = QuestionsLearnedData({})
 """Zmienna zawierająca obiekt z wyuczonymi danymi na temat pytań i odpowiedzi."""
 
 
+def load_learned_questions_data_from_database() -> None:
+    """
+    Funkcja wczytuje do pamięci wyuczone dane o pytaniach i odpowiedziach.
+
+    :return: None
+    """
+    questions_learned: IO = open(QUESTIONS_LEARN_DATA_DB_PATH, 'r')
+    questions_learned_json: str = ' '.join(questions_learned.readlines())
+    questions_learned.close()
+    questions_learned_list: dict = json.loads(questions_learned_json)
+    global questions_learned_data
+    questions_learned_data = SpamLearnedData(questions_learned_list)
+    dump_database: dict = questions_learned_data.dump_database()
+    print('[LEARN] Wczytano dane nauki dla następującej ilości pytań i odpowiedzi: ' +
+          str(len(dump_database['words'])) + " / " +
+          str(len(dump_database['answers'])))
+
+
 def learn_questions_data_from_seed() -> None:
     """
     Funkcja wczytuje dane uczące i przetwarza je w celu nauki algorytmu pytań i odpowiedzi.
@@ -67,7 +85,7 @@ def load_learned_spam_data_from_database() -> None:
     spam_learned_list: dict = json.loads(spam_learned_json)
     global spam_learned_data
     spam_learned_data = SpamLearnedData(spam_learned_list)
-    print('[LEARN] Wczytano dane nauki dla następującej ilości polskich słów: ' + \
+    print('[LEARN] Wczytano dane nauki dla następującej ilości słów spamowych: ' +
           str(len(spam_learned_data.dump_database())))
 
 
