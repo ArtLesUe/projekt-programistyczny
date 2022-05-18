@@ -4,6 +4,7 @@ from typing import IO
 
 from classes.polish_learned_data import PolishLearnedData
 from classes.spam_learned_data import SpamLearnedData
+from classes.questions_learned_data import QuestionsLearnedData
 
 
 POLISH_DICTIONARY_DB_PATH: str = 'database/polish-database.json'
@@ -14,11 +15,44 @@ SPAM_LEARN_DATA_DB_PATH: str = 'database/spam-database.json'
 """Ścieżka do pliku bazy danych z wyuczonymi danymi na temat spamu i nie spamu."""
 SEED_SPAM_LEARN_DATA_PATH: str = 'seed/learn-data-spam.json'
 """Ścieżka do pliku nauki na temat tego, co jest spamem, a co nie jest spamem."""
+QUESTIONS_LEARN_DATA_DB_PATH: str = "database/questions-database.json"
+"""Ścieżka do pliku bazy danych z wyuczonymi danymi na temat pytań i odpowiedzi."""
+SEED_QUESTIONS_LEARN_DATA_DB_PATH: str = "seed/learn-data-questions.json"
+"""Ścieżka do pliku nauki na temat pytań i odpowiedzi na nie."""
 
 polish_learned_data: PolishLearnedData = PolishLearnedData([])
 """Zmienna zawierająca obiekt z wyuczonymi danymi na temat polskich słów."""
 spam_learned_data: SpamLearnedData = SpamLearnedData({})
 """Zmienna zawierająca obiekt z wyuczonymi danymi na temat spamu i nie spamu."""
+questions_learned_data: QuestionsLearnedData = QuestionsLearnedData({})
+"""Zmienna zawierająca obiekt z wyuczonymi danymi na temat pytań i odpowiedzi."""
+
+
+def learn_questions_data_from_seed() -> None:
+    """
+    Funkcja wczytuje dane uczące i przetwarza je w celu nauki algorytmu pytań i odpowiedzi.
+
+    :return: None
+    """
+    print("\n[LEARN] Uczenie się informacji o pytaniach i odpowiedziach na podstawie pliku nauki...")
+
+    seed_file: IO = open(SEED_QUESTIONS_LEARN_DATA_DB_PATH, 'r')
+    questions_data_json: str = ' '.join(seed_file.readlines())
+    seed_file.close()
+    questions_data: dict = json.loads(questions_data_json)
+    global questions_learned_data
+
+    for question in questions_data:
+        questions_learned_data.learn(question['question'], question['answer'], polish_learned_data)
+
+    print('[LEARN] Zapisywanie efektów nauki do bazy danych...')
+
+    questions_json: str = json.dumps(questions_learned_data.dump_database())
+
+    with open(QUESTIONS_LEARN_DATA_DB_PATH, 'w') as f:
+        f.writelines(questions_json)
+
+    print('[LEARN] Zapisano wyniki uczenia do pliku bazy danych...')
 
 
 def load_learned_spam_data_from_database() -> None:
