@@ -28,6 +28,28 @@ questions_learned_data: QuestionsLearnedData = QuestionsLearnedData({})
 """Zmienna zawierająca obiekt z wyuczonymi danymi na temat pytań i odpowiedzi."""
 
 
+def learn_spam_new_data(text_data: str, is_spam: bool) -> None:
+    """
+    Uczy model nowych danych, które są spamem lub nie są spamem.
+
+    :param str text_data: dane tekstowe, które będą analizowane.
+    :param bool is_spam: wartość logiczna czy tekst jest spamem.
+    :return: None
+    """
+    global polish_learned_data
+    global spam_learned_data
+
+    if is_spam:
+        spam_learned_data.learn_spam(text_data, polish_learned_data)
+    else:
+        spam_learned_data.learn_no_spam(text_data, polish_learned_data)
+
+    words_json: str = json.dumps(spam_learned_data.dump_database())
+
+    with open(SPAM_LEARN_DATA_DB_PATH, 'w') as f:
+        f.writelines(words_json)
+
+
 def load_learned_questions_data_from_database() -> None:
     """
     Funkcja wczytuje do pamięci wyuczone dane o pytaniach i odpowiedziach.

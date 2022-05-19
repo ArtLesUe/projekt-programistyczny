@@ -55,6 +55,18 @@ paths:
             example: {
               'operation': 'success'
             }
+        '400':
+          description: Brak wymaganego parametru
+          schema:
+            example: {
+              "message": {
+                "textData": "Missing required parameter in the JSON body or the post body or the query string"
+              }
+            }
+        '422':
+          description: Parametr niewłaściwy
+          schema:
+            example: { 'textData' : 'empty' }
       tags:
         - spambot
 definitions:
