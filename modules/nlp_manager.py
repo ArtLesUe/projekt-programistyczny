@@ -28,6 +28,18 @@ questions_learned_data: QuestionsLearnedData = QuestionsLearnedData({})
 """Zmienna zawierająca obiekt z wyuczonymi danymi na temat pytań i odpowiedzi."""
 
 
+def ask_question_get_answer(question: str) -> dict:
+    """
+    Wprowadza pytanie do modelu i uzyskuje odpowiedź na podstawie wyuczonych danych.
+
+    :param str question: pytanie, które zostanie przekazane do modelu.
+    :return: dict - słownik zawierający odpowiedź i jej punktację
+    """
+    global questions_learned_data
+
+    return questions_learned_data.get_answer(question)
+
+
 def ask_is_text_a_spam(text_data: str) -> dict:
     """
     Sprawdza, czy podany tekst jest spamem, czy nie na podstawie nauczonych danych.

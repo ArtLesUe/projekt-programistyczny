@@ -24,6 +24,24 @@ class QuestionsLearnedData:
         """
         return self.__learned_data
 
+    def get_answer(self, question: str) -> dict:
+        """
+        Wprowadza pytanie do modelu i uzyskuje odpowiedź na podstawie wyuczonych danych.
+
+        :param str question: pytanie, które zostanie przekazane do modelu.
+        :return: dict - słownik zawierający odpowiedź i jej punktację
+        """
+        text = "".join([ch for ch in question if ch.isalpha() or ch == " "])
+        word_table: list = text.lower().split(" ")
+
+        for word in word_table:
+            if len(word) >= 4:
+                if self.__learned_data['words'].get(word) is not None:
+                    for answer in self.__learned_data["words"][word]:
+                        print(answer)
+
+        return {}
+
     def learn(self, question: str, answer: str, dictionary: PolishLearnedData) -> None:
         """
         Funkcja ucząca algorytm nowych pytań i odpowiedzi.
