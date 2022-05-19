@@ -27,7 +27,6 @@ class SpamLearnedData:
         Sprawdza, czy podany tekst jest spamem, czy nie na podstawie nauczonych danych.
 
         :param str text: tekst do sprawdzenia, czy jest spamem.
-        :param PolishLearnedData dictionary: nauczone dane o języku polskim.
         :return: dict - słownik zawierający werdykt i ocenę prawdopodobieństwa spamu.
         """
         text = "".join([ch for ch in text if ch.isalpha() or ch == " "])
@@ -39,18 +38,16 @@ class SpamLearnedData:
         for word in word_table:
             if len(word) >= 4:
                 if self.__learned_data.get(word) is None:
-                    spam_points += 1
+                    spam_points += 0
                     no_spam_points += 1
                 else:
                     spam_points += self.__learned_data[word]["spam"]
                     no_spam_points += self.__learned_data[word]["nie-spam"]
 
-        verdict: bool = False
-
         if spam_points / (spam_points + no_spam_points) > 0.5:
-            verdict = True
+            verdict: bool = True
         else:
-            verdict = False
+            verdict: bool = False
 
         print("[ASK] analiza tekstu spam wykazała: " + str({
             'spamProbability': spam_points / (spam_points + no_spam_points),
