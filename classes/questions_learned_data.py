@@ -34,13 +34,46 @@ class QuestionsLearnedData:
         text = "".join([ch for ch in question if ch.isalpha() or ch == " "])
         word_table: list = text.lower().split(" ")
 
+        contest: dict = {}
+
         for word in word_table:
             if len(word) >= 4:
                 if self.__learned_data['words'].get(word) is not None:
                     for answer in self.__learned_data["words"][word]:
-                        print(answer)
+                        if contest.get(answer) is None:
+                            contest[answer] = 0
+                        contest[answer] += self.__learned_data["words"][word][answer]
 
-        return {}
+        if len(contest) == 0:
+            print('[ASK] szacuję odpowiedź na pytanie na: brak odpowiedzi')
+
+            return {
+                'answer': 'Nie wiem o co ci chodzi, napisz to inaczej.',
+                'probability': 0,
+                'answerId': 0
+            }
+
+        max_points: int = 0
+        max_answer: str = ""
+        max_id: str = ""
+
+        for item in contest:
+            if contest[item] > max_points:
+                max_points = contest[item]
+                max_answer = self.__learned_data["answers"][item]
+                max_id = item
+
+        print('[ASK] szacuję odpowiedź na pytanie na: ' + str({
+            'answer': max_answer,
+            'probability': str(max_points),
+            'answerId': max_id
+        }))
+
+        return {
+            'answer': max_answer,
+            'probability': str(max_points),
+            'answerId': max_id
+        }
 
     def learn(self, question: str, answer: str, dictionary: PolishLearnedData) -> None:
         """
