@@ -142,6 +142,42 @@ paths:
             example: { 'textData': 'empty' }
       tags:
         - spambot
+  /ask/question:
+    post:
+      summary: uzyskanie odpowiedzi na zadane pytanie
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Dane pytania, na jakie poszukujemy odpowiedzi"
+          required: true
+          schema:
+            $ref: "#/definitions/QuestionAskData"
+      responses:
+        '200':
+          description: OK
+          schema:
+            example: {
+              "spamProbability": 0.5,
+              "isSpam": false
+            }
+        '400':
+          description: Brak wymaganego parametru
+          schema:
+            example: {
+              "message": {
+                "question": "Missing required parameter in the JSON body or the post body or the query string"
+              }
+            }
+        '422':
+          description: Parametr niewłaściwy
+          schema:
+            example: { 'question': 'empty' }
+      tags:
+        - questionbot
 definitions:
   SpamLearnData:
     type: "object"
@@ -176,3 +212,10 @@ definitions:
         description: "Odpowiedź na zadane pytanie, która zostanie nauczona, minimum 5 znaków."
     xml:
       name: "QuestionLearnData"
+  QuestionAskData:
+    type: "object"
+    properties:
+      question:
+        type: "string"
+        description: "Pytanie, na jakie chcemy uzyskać odpowiedź."
+    xml: "QuestionAskData"
