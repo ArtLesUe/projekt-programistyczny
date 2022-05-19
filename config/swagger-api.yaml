@@ -106,6 +106,42 @@ paths:
             example: { 'question': 'too short, minimum 5 chars' }
       tags:
         - questionbot
+  /ask/spam:
+    post:
+      summary: sprawdzenie czy przesłany tekst jest spamem czy nie
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Dane do oceny czy są spamem czy nie"
+          required: true
+          schema:
+            $ref: "#/definitions/SpamAskData"
+      responses:
+        '200':
+          description: OK
+          schema:
+            example: {
+              "spamProbability": 0.5,
+              "isSpam": false
+            }
+        '400':
+          description: Brak wymaganego parametru
+          schema:
+            example: {
+              "message": {
+                "textData": "Missing required parameter in the JSON body or the post body or the query string"
+              }
+            }
+        '422':
+          description: Parametr niewłaściwy
+          schema:
+            example: { 'textData': 'empty' }
+      tags:
+        - spambot
 definitions:
   SpamLearnData:
     type: "object"
@@ -121,6 +157,14 @@ definitions:
           - "not-spam"
     xml:
       name: "SpamLearnData"
+  SpamAskData:
+    type: "object"
+    properties:
+      textData:
+        type: "string"
+        description: "Tekst, który sprawdzamy, czy jest spamem czy nie."
+    xml:
+      name: "SpamAskData"
   QuestionLearnData:
     type: "object"
     properties:

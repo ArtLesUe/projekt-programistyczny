@@ -28,6 +28,19 @@ questions_learned_data: QuestionsLearnedData = QuestionsLearnedData({})
 """Zmienna zawierająca obiekt z wyuczonymi danymi na temat pytań i odpowiedzi."""
 
 
+def ask_is_text_a_spam(text_data: str) -> dict:
+    """
+    Sprawdza, czy podany tekst jest spamem, czy nie na podstawie nauczonych danych.
+
+    :param str text_data: tekst, który będzie sprawdzony, czy jest spamem.
+    :return: dict - słownik zawierający werdykt i prawdopodobieństwo decyzji.
+    """
+    global polish_learned_data
+    global spam_learned_data
+
+    return spam_learned_data.check_text(text_data)
+
+
 def learn_question_new_data(question: str, answer: str) -> None:
     """
     Uczy algorytm pytań i odpowiedzi nowego zestawu pytanie i odpowiedź.
