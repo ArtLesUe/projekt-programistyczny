@@ -16,6 +16,7 @@ fetch("http://127.0.0.1:5000/learn/question")
         })
     .then(jsondata => know = jsondata);
 
+// Talk
 
 function talk() {
   var user = document.getElementById("userBox").value;
