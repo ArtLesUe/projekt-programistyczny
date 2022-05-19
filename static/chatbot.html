@@ -1,24 +1,91 @@
+<!--I hope you will like this chat bot-->
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>ChatBot</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
   </head>
-  <body>
 
-    <h2>ChatBot</h2>
-    <p>You can start writing here:</p>
+  <body onload="myLoader()" style="margin: 0;">
+    <div id="loader">
+      <div class="lds-spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
 
-    <!-- We will put our React component inside this div. -->
-    <div id="write_box"></div>
+    <div style="display: none;" id="myDiv" class="animate-bottom">
+      <!--Auto Type Starts-->
+      <h1 class="auto">
+        <a
+          href=""
+          class="typewrite"
+          data-period="2000"
+          data-type='[ "Cześć, jestem ChatBot!", "Co tam u Ciebie?", "Porozmawiasz ze mną?", "Napisz do mnie na chacie." ]'
+        >
+          <span class="wrap"></span>
+        </a>
+      </h1>
+      <div class="up"><h1>ChatBot</h1></div>
+      <!--Button pop up-->
+      <button class="open-button" onclick="openForm()">Chat</button>
 
-    <!-- Load React. -->
-    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+      <div class="chat-popup" id="myForm">
+        <form class="form-container">
+          <label><b>Chat</b></label>
+          <textarea
+            placeholder="Napisz coś... "
+            id="userBox"
+            type="text"
+            onkeydown="if (event.keyCode == 13) {talk()}"
+          ></textarea>
+          <div class="moon" id="chatLog">
+            <p class="kane"><i class="fa fa-refresh fa-spin"></i></p>
+          </div>
 
-    <!-- Load our React component. -->
-    <script src="script.js"></script>
+          <button type="button" class="btn cancel" onclick="closeForm()">
+            Zamknij
+          </button>
+        </form>
+      </div>
 
+      <div>
+        <div>
+        </div>
+      </div>
+    </div>
+
+    <footer id="f" style="display: none;">
+      <b>UE.PSI 2022</b> Artur Leśnik && Alicja Pęgiel
+    </footer>
+
+    <script src="app.js"></script>
   </body>
 </html>
