@@ -7,19 +7,31 @@ info:
   title: ChatBot API
   description: Projekt zaliczeniowy na zajęcia z Projektu Programistycznego, Uniwersytet Ekonomiczny w Katowicach, informatyka, niestacjonarne, 2 grupa, rok 2021/2022
 tags:
+  - name: main
+    description: komendy ogólne związane z API
   - name: spambot
-    description: Komendy związane z obsługą ChatBota rozpoznającego tekst będący spamem
+    description: komendy związane z obsługą ChatBota rozpoznającego tekst będący spamem
 
 paths:
-  /hello/world:
+  /:
     get:
-      summary: output hello world.
+      summary: informacje o API i jego autorach
       produces:
-        - application/text
+        - application/json
       responses:
         '200':
           description: OK
           schema:
-            example: "Hello World!!!"
+            example: {
+              'przedmiot': 'Projekt programistyczny',
+              'kierunek': 'Informatyka',
+              'grupa': 'Studia niestacjonarne',
+              'rok': '2021/2022',
+              'uczelnia': 'Uniwersytet Ekonomiczny',
+              'autorzy': [
+                'Artur Leśnik',
+                'Alicja Pęgiel'
+              ]
+            }
       tags:
-        - spambot
+        - main
