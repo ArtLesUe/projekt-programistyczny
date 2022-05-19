@@ -28,6 +28,25 @@ questions_learned_data: QuestionsLearnedData = QuestionsLearnedData({})
 """Zmienna zawierająca obiekt z wyuczonymi danymi na temat pytań i odpowiedzi."""
 
 
+def learn_question_new_data(question: str, answer: str) -> None:
+    """
+    Uczy algorytm pytań i odpowiedzi nowego zestawu pytanie i odpowiedź.
+
+    :param str question: nowe pytanie do nauczenia algorytmu.
+    :param str answer: preferowana odpowiedź na zadane pytanie.
+    :return: None
+    """
+    global polish_learned_data
+    global questions_learned_data
+
+    questions_learned_data.learn(question, answer, polish_learned_data)
+
+    questions_json: str = json.dumps(questions_learned_data.dump_database())
+
+    with open(QUESTIONS_LEARN_DATA_DB_PATH, 'w') as f:
+        f.writelines(questions_json)
+
+
 def learn_spam_new_data(text_data: str, is_spam: bool) -> None:
     """
     Uczy model nowych danych, które są spamem lub nie są spamem.
@@ -61,7 +80,7 @@ def load_learned_questions_data_from_database() -> None:
     questions_learned.close()
     questions_learned_list: dict = json.loads(questions_learned_json)
     global questions_learned_data
-    questions_learned_data = SpamLearnedData(questions_learned_list)
+    questions_learned_data = QuestionsLearnedData(questions_learned_list)
     dump_database: dict = questions_learned_data.dump_database()
     print('[LEARN] Wczytano dane nauki dla następującej ilości pytań i odpowiedzi: ' +
           str(len(dump_database['words'])) + " / " +
