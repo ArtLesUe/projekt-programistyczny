@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Api
+from swagger_ui import api_doc
 
 from rest_api.api_endpoint_hello import ProjectWelcomeMessage
 from rest_api.api_endpoint_learn_spam import ChatbotLearnSpamData
@@ -13,6 +14,8 @@ init_database()
 
 app = Flask(__name__)
 api = Api(app)
+
+api_doc(app, config_path='./config/swagger-api.yaml', url_prefix='/api/doc', title='SWAGGER DOCUMENTATION')
 
 api.add_resource(ProjectWelcomeMessage, '/')
 api.add_resource(ChatbotLearnSpamData, '/learn/spam')

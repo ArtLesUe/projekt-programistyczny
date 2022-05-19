@@ -1,0 +1,25 @@
+swagger: '2.0'
+schemes:
+  - http
+basePath: /
+info:
+  version: 1.0.0
+  title: ChatBot API
+  description: Projekt zaliczeniowy na zajęcia z Projektu Programistycznego, Uniwersytet Ekonomiczny w Katowicach, informatyka, niestacjonarne, 2 grupa, rok 2021/2022
+tags:
+  - name: spambot
+    description: Komendy związane z obsługą ChatBota rozpoznającego tekst będący spamem
+
+paths:
+  /hello/world:
+    get:
+      summary: output hello world.
+      produces:
+        - application/text
+      responses:
+        '200':
+          description: OK
+          schema:
+            example: "Hello World!!!"
+      tags:
+        - spambot

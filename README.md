@@ -10,6 +10,7 @@ TBD
 
 ```
 pip install flask-restful
+pip install swagger-ui-py
 ```
 
 ## Frontend Chat
