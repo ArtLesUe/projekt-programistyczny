@@ -11,7 +11,6 @@ tags:
     description: komendy ogólne związane z API
   - name: spambot
     description: komendy związane z obsługą ChatBota rozpoznającego tekst będący spamem
-
 paths:
   /:
     get:
@@ -35,3 +34,41 @@ paths:
             }
       tags:
         - main
+  /learn/spam:
+    post:
+      summary: uczy bota spamowego nowych danych przy pomocy danych nauki
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Nowe dane nauki do rozpoznawania spamu"
+          required: true
+          schema:
+            $ref: "#/definitions/SpamLearnData"
+      responses:
+        '200':
+          description: OK
+          schema:
+            example: {
+              'operation': 'success'
+            }
+      tags:
+        - spambot
+definitions:
+  SpamLearnData:
+    type: "object"
+    properties:
+      textData:
+        type: "string"
+        description: "Dane tekstowe, które posłużą jako dane nauki w aplikacji."
+      isSpam:
+        type: "string"
+        description: "Oznaczenie, czy w czasie nauki traktować powyższe dane jako spam czy prawidłowy tekst."
+        enum:
+          - "spam"
+          - "not-spam"
+    xml:
+      name: "SpamLearnData"
