@@ -24,4 +24,4 @@ api.add_resource(ChatbotAskQuestion, '/ask/question')
 api.add_resource(ChatbotAskSpam, '/ask/spam')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0")

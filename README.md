@@ -13,6 +13,14 @@ pip install flask-restful
 pip install swagger-ui-py
 ```
 
+## How to run on Docker
+
+```commandline
+docker image rm chatbot-uekat-gr2-inf-nies
+docker build -t chatbot-uekat-gr2-inf-nies ./
+docker run --name chatbot-uekat --rm -p 5000:5000 chatbot-uekat-gr2-inf-nies
+```
+
 ## Frontend Chat
 
 ```
