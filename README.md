@@ -30,7 +30,7 @@ source venv/bin/activate
 pip install flask-restful
 pip install swagger-ui-py
 pip install gunicorn
-gunicorn -w 1 -b 0.0.0.0:5000 main:app
+gunicorn -w 1 -b 0.0.0.0:5000 --timeout 1200 main:app
 ```
 
 ## How to run on Docker
