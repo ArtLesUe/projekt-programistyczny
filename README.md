@@ -24,9 +24,14 @@ gunicorn -w 1 -b 0.0.0.0:5000 main:app
 ## How to run on Docker
 
 ```commandline
-docker image rm chatbot-uekat-gr2-inf-nies
 docker build -t chatbot-uekat-gr2-inf-nies ./
 docker run --name chatbot-uekat --rm -p 5000:5000 chatbot-uekat-gr2-inf-nies
+```
+
+## How to update on production
+
+```commandline
+sh deploy-new-version.sh
 ```
 
 ## Frontend Chat
