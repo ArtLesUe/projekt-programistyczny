@@ -18,8 +18,12 @@ RUN ["pip", "install", "flask-restful"]
 
 RUN ["pip", "install", "swagger-ui-py"]
 
+RUN ["pip", "install", "gunicorn"]
+
 WORKDIR /app
 
 EXPOSE 5000/tcp
 
-CMD ["python", "main.py"]
+ENV PYTHONUNBUFFERED=1
+
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:5000", "main:app"]

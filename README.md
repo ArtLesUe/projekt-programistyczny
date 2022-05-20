@@ -1,16 +1,24 @@
 # ChatBot
+
 ## Authors
-Artur Leśnik i Alicja Pęgiel
+  * Artur Leśnik
+  * Alicja Pęgiel
+
 ## About ChatBot
 ChatBot is an REST API chat application. The project uses machine learning to teach the bot how to properly communicate with humans, while also making sense. 
+
 ## Features
 TBD
 
-## How to install
+## How to run locally
 
-```
+```commandline
+python3 -m venv venv
+source venv/bin/activate
 pip install flask-restful
 pip install swagger-ui-py
+pip install gunicorn
+gunicorn -w 1 -b 0.0.0.0:5000 main:app
 ```
 
 ## How to run on Docker
