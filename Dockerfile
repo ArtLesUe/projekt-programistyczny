@@ -26,4 +26,4 @@ EXPOSE 5000/tcp
 
 ENV PYTHONUNBUFFERED=1
 
-CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:5000", "main:app"]
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:5000", "--timeout", "1200", "main:app"]
